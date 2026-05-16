@@ -36,19 +36,43 @@ double CalculateRiskBasedLot(int sl_pips)
 bool CheckAllConditions()
 {
    double score = CalculateDangerScore();
-   if(score >= SCORE_CAUTION) return false;
+   if(score >= SCORE_CAUTION)
+   {
+      if(SHOW_DEBUG_LOGS) Print("Order blocked: danger score >= caution threshold");
+      return false;
+   }
 
    int buys = GetPositionCount(POSITION_TYPE_BUY);
    int sells = GetPositionCount(POSITION_TYPE_SELL);
-   if(MathMax(buys, sells) >= MAX_POSITIONS_SIDE) return false;
+   if(MathMax(buys, sells) >= MAX_POSITIONS_SIDE)
+   {
+      if(SHOW_DEBUG_LOGS) Print("Order blocked: max positions per side reached");
+      return false;
+   }
 
-   if(GetTotalDrawdownPercent() >= MAX_DRAWDOWN) return false;
+   if(GetTotalDrawdownPercent() >= MAX_DRAWDOWN)
+   {
+      if(SHOW_DEBUG_LOGS) Print("Order blocked: drawdown limit reached");
+      return false;
+   }
 
-   if(GetEntrySignal() == 0) return false;
+   if(GetEntrySignal() == 0)
+   {
+      if(SHOW_DEBUG_LOGS) Print("Order blocked: no entry signal");
+      return false;
+   }
 
-   if(!IsRecoveryLikely()) return false;
+   if(!IsRecoveryLikely())
+   {
+      if(SHOW_DEBUG_LOGS) Print("Order blocked: recovery not likely");
+      return false;
+   }
 
-   if(USE_NEWS_FILTER && IsNewsBlocked()) return false;
+   if(USE_NEWS_FILTER && IsNewsBlocked())
+   {
+      if(SHOW_DEBUG_LOGS) Print("Order blocked: news filter");
+      return false;
+   }
 
    return true;
 }

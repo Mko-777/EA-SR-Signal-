@@ -112,7 +112,7 @@ void UpdateMarketData()
    M6_atr_average = 0.0;
    for(int i = 1; i <= ATR_PERIOD; i++)
       M6_atr_average += ReadATRValue(PERIOD_M15, ATR_PERIOD, i);
-   M6_atr_average /= MathMax(ATR_PERIOD, 1);
+   M6_atr_average /= ATR_PERIOD;
    M7_atr_ratio = (M6_atr_average > 0.0 ? M5_atr_current / M6_atr_average : 0.0);
 
    int bars_for_levels = 20;

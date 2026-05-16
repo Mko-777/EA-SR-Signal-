@@ -17,6 +17,18 @@ CTrade trade;
 
 int OnInit()
 {
+   if(ATR_PERIOD <= 0 || EMA_FAST <= 0 || EMA_SLOW <= 0 || EMA_SIGNAL_FAST <= 0 || EMA_SIGNAL_SLOW <= 0)
+   {
+      Print("Invalid period settings. All EMA/ATR periods must be > 0.");
+      return INIT_PARAMETERS_INCORRECT;
+   }
+
+   if(MAX_DRAWDOWN <= 0.0 || MAX_ORDER_AGE_HOURS <= 0 || MAX_POSITIONS_SIDE <= 0 || STOP_LOSS_PIPS <= 0)
+   {
+      Print("Invalid risk settings. MAX_DRAWDOWN, MAX_ORDER_AGE_HOURS, MAX_POSITIONS_SIDE, STOP_LOSS_PIPS must be > 0.");
+      return INIT_PARAMETERS_INCORRECT;
+   }
+
    trade.SetExpertMagicNumber(MAGIC_NUMBER);
    trade.SetDeviationInPoints(20);
    return INIT_SUCCEEDED;
