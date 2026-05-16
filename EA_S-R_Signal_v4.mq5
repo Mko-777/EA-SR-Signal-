@@ -1166,8 +1166,9 @@ void ProcessAllSellGrids()
 void OpenFixedMultipleGridBuy(string comment)
 {
    if(!EnableGrid) return;
+   double pip = ((_Digits == 3 || _Digits == 5) ? _Point * 10.0 : _Point);
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-   double sl  = (StopLoss > 0) ? ask - StopLoss * _Point : 0;
+   double sl  = (StopLoss > 0) ? ask - StopLoss * pip : 0;
    double vol = NormalizeVolume(GridLotSize);
    if(trade.Buy(vol, _Symbol, ask, sl, 0, comment))
       Print("GRID BUY: Ticket=", trade.ResultOrder(), " Vol=", vol, " Price=", DoubleToString(ask, _Digits));
@@ -1181,8 +1182,9 @@ void OpenFixedMultipleGridBuy(string comment)
 void OpenFixedMultipleGridSell(string comment)
 {
    if(!EnableGrid) return;
+   double pip = ((_Digits == 3 || _Digits == 5) ? _Point * 10.0 : _Point);
    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-   double sl  = (StopLoss > 0) ? bid + StopLoss * _Point : 0;
+   double sl  = (StopLoss > 0) ? bid + StopLoss * pip : 0;
    double vol = NormalizeVolume(GridLotSize);
    if(trade.Sell(vol, _Symbol, bid, sl, 0, comment))
       Print("GRID SELL: Ticket=", trade.ResultOrder(), " Vol=", vol, " Price=", DoubleToString(bid, _Digits));
@@ -1195,8 +1197,9 @@ void OpenFixedMultipleGridSell(string comment)
 //+------------------------------------------------------------------+
 void OpenBuy()
 {
+   double pip = ((_Digits == 3 || _Digits == 5) ? _Point * 10.0 : _Point);
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-   double sl  = (StopLoss > 0) ? ask - StopLoss * _Point : 0;
+   double sl  = (StopLoss > 0) ? ask - StopLoss * pip : 0;
    double vol = CalculateNextVolume();
    if(trade.Buy(vol, _Symbol, ask, sl, 0, "SR Signal BUY"))
    {
@@ -1216,8 +1219,9 @@ void OpenBuy()
 //+------------------------------------------------------------------+
 void OpenSell()
 {
+   double pip = ((_Digits == 3 || _Digits == 5) ? _Point * 10.0 : _Point);
    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-   double sl  = (StopLoss > 0) ? bid + StopLoss * _Point : 0;
+   double sl  = (StopLoss > 0) ? bid + StopLoss * pip : 0;
    double vol = CalculateNextVolume();
    if(trade.Sell(vol, _Symbol, bid, sl, 0, "SR Signal SELL"))
    {
