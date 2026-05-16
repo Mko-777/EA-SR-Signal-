@@ -12,74 +12,74 @@
 CTrade trade;
 
 //+------------------------------------------------------------------+
-//| S-R Signal v1 Settings                                          |
+//| Настройки индикатора S-R Signal v1                               |
 //+------------------------------------------------------------------+
 input group "=== S-R Signal v1 Settings ==="
-input int  Zone1Length          = 100;
-input int  Zone2Length          = 60;
-input int  Zone3Length          = 20;
-input bool EnableHTFTrendFilter = true;
-input ENUM_TIMEFRAMES HTFTimeframe = PERIOD_H1;
+input int Zone1Length = 100;        // Zone 1 Length (Trend)
+input int Zone2Length = 60;         // Zone 2 Length (Impulse)
+input int Zone3Length = 20;         // Zone 3 Length (Signal)
+input bool EnableHTFTrendFilter = true;    // Enable HTF Trend Direction Filter
+input ENUM_TIMEFRAMES HTFTimeframe = PERIOD_H1;  // HTF Trend Timeframe
 
 //+------------------------------------------------------------------+
-//| Stochastic Filter                                                |
+//| Stochastic Filter Settings                                       |
 //+------------------------------------------------------------------+
 input group "=== Stochastic Filter ==="
-input bool             EnableStochasticFilter    = true;
-input int              Stochastic_Kperiod        = 5;
-input int              Stochastic_Dperiod        = 3;
-input int              Stochastic_Slowing        = 3;
-input ENUM_MA_METHOD   Stochastic_Method         = MODE_SMA;
-input ENUM_STO_PRICE   Stochastic_Price          = STO_LOWHIGH;
-input double           Stochastic_UpperLevel     = 70.0;
-input double           Stochastic_LowerLevel     = 30.0;
-input bool             Stochastic_UseMainLine    = true;
-input bool             Stochastic_UseSignalLine  = false;
-input bool             Stochastic_CrossoverSignals = false;
-input bool             ShowStochasticDebug       = true;
+input bool EnableStochasticFilter = true;
+input int Stochastic_Kperiod = 5;
+input int Stochastic_Dperiod = 3;
+input int Stochastic_Slowing = 3;
+input ENUM_MA_METHOD Stochastic_Method = MODE_SMA;
+input ENUM_STO_PRICE Stochastic_Price = STO_LOWHIGH;
+input double Stochastic_UpperLevel = 70.0;
+input double Stochastic_LowerLevel = 30.0;
+input bool Stochastic_UseMainLine = true;
+input bool Stochastic_UseSignalLine = false;
+input bool Stochastic_CrossoverSignals = false;
+input bool ShowStochasticDebug = true;
 
 //+------------------------------------------------------------------+
-//| Fixed Multiple Grids                                             |
+//| FIXED MULTIPLE GRIDS                                             |
 //+------------------------------------------------------------------+
-input group "=== Fixed Multiple Grids ==="
-input bool   EnableGrid      = true;
-input int    GridStepPips    = 50;
-input double GridLotSize     = 0.01;
-input bool   ShowGridDebug   = true;
+input group "=== FIXED MULTIPLE GRIDS ==="
+input bool EnableGrid = true;
+input int GridStepPips = 50;
+input double GridLotSize = 0.01;
+input bool ShowGridDebug = true;
 
 //+------------------------------------------------------------------+
 //| Trade Settings                                                   |
 //+------------------------------------------------------------------+
 input group "=== Trade Settings ==="
-input double LotSize  = 0.01;
-input int    StopLoss = 50;
+input double LotSize = 0.01;
+input int StopLoss = 50;
 
 //+------------------------------------------------------------------+
-//| Volume Increase with Lot Limit                                   |
+//| Volume Increase with Lot Limit                                  |
 //+------------------------------------------------------------------+
 input group "=== Volume Increase with Lot Limit ==="
-input bool   EnableVolumeIncrease = true;
-input double VolumeMultiplier     = 2.0;
-input int    MaxSignalCount       = 5;
-input double MaxLotSize           = 0.1;
-input bool   ResetOnNewDay        = true;
-input bool   ShowVolumeDebug      = true;
+input bool EnableVolumeIncrease = true;
+input double VolumeMultiplier = 2.0;
+input int MaxSignalCount = 5;
+input double MaxLotSize = 0.1;
+input bool ResetOnNewDay = true;
+input bool ShowVolumeDebug = true;
 
 //+------------------------------------------------------------------+
-//| Smart Take Profit (SmartTP)                                      |
+//| Take Profit with Grid Deactivation Only                         |
 //+------------------------------------------------------------------+
-input group "=== Smart Take Profit (SmartTP) ==="
-input bool   EnableSmartTP     = true;
-input double SmartTP_Threshold = 50.0;
-input bool   ShowSmartTPDebug  = true;
-
-//+------------------------------------------------------------------+
-//| Simple Take Profit (fallback when SmartTP=false)                |
-//+------------------------------------------------------------------+
-input group "=== Simple Take Profit ==="
+input group "=== Take Profit with Grid Deactivation Only ==="
 input bool   EnableSimpleTP = true;
 input double TargetProfit   = 50.0;
 input bool   ShowDebugInfo  = false;
+
+//+------------------------------------------------------------------+
+//| === Smart Take Profit (SmartTP) ===                              |
+//+------------------------------------------------------------------+
+input group "=== Smart Take Profit (SmartTP) ==="
+input bool   EnableSmartTP     = true;    // true=SmartTP, false=SimpleTP
+input double SmartTP_Threshold = 50.0;   // Threshold $ for opposite positions profit
+input bool   ShowSmartTPDebug  = true;   // Show SmartTP debug info
 
 //+------------------------------------------------------------------+
 //| Smart Lot Calculator (Risk-Based)                                |
